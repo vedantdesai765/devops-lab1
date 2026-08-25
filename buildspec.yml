@@ -1,1 +1,22 @@
+version: 0.2
 
+phases:
+  install:
+    runtime-versions:
+      python: 3.11
+
+  pre_build:
+    commands:
+      - echo Installing dependencies...
+      - pip install flask pytest
+
+  build:
+    commands:
+      - echo Running tests...
+      - pytest test_app.py
+      - echo Building Docker image...
+      - docker build -t devops-lab1 .
+
+  post_build:
+    commands:
+      - echo Build completed successfully
